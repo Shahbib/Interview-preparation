@@ -1,0 +1,55 @@
+Pronlem link : [ https://leetcode.com/problems/hamming-distance/description/ ]
+Tag : Easy
+#Approach 1 : using _buitin_popcount()  //It counts number of set bits 
+
+Tc = O(n) //if it were n bits instead of 32 bits, then it should be  O(n).
+sc = O(1)
+
+#code: 
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        return __builtin_popcount(x^y);
+    }
+};
+
+#Approach 2 : using Brian Kernighan’s method (indirectly) 
+
+Tc = O(n) //if it were n bits instead of 32 bits, then it should be  O(n).
+sc = O(1)
+
+#code
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int ans = x^y;
+        int count = 0;
+        while (ans!=0){
+            count += ans&1; //Check if the last bit is 1
+            ans = ans>>1;  //Shift right to check next bit
+        } 
+        return count ;
+
+    }
+};
+
+#Approach 3: Brian Kernighan’s Algorithm 
+// Each time you do n = n & (n - 1), it removes the rightmost set bit (i.e., the lowest 1) from n.
+// So, you repeat this operation until n becomes 0, and count how many times you do it — that’s the number of set bits.
+
+Tc = O(logn)
+sc = O(1)
+  
+#code:
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int ans = x^y;
+        int count = 0;
+        while (ans!=0){
+           ans = ans & (ans-1);
+           count++;
+        } 
+        return count ;
+    }
+};
