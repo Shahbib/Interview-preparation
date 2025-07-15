@@ -13,11 +13,23 @@ public:
     }
 };
 
-#Approach 2:
+#Approach 2: using n&1 and right shift
 
-Tc = O( ) sc = O( )
+Tc = O(n) 
+sc = O(1)
 
 #code
+class Solution {
+public:
+    int hammingWeight(int n) {
+        int count = 0;
+        while (n>0){
+            count += n&1; //Check if the last bit is 1
+            n=n>>1; //Shift right to check next bit
+        }
+        return count;
+    }
+};
 
 #Approach 3: using Brian Kernighan's
 
