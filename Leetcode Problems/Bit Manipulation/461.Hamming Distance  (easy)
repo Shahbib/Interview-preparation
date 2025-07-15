@@ -1,5 +1,5 @@
-Pronlem link : [ https://leetcode.com/problems/hamming-distance/description/ ]
-Tag : Easy
+Problem link : [ https://leetcode.com/problems/hamming-distance/description/ ]
+Tag: Easy
 #Approach 1 : using _buitin_popcount()  //It counts number of set bits 
 
 Tc = O(n) //if it were n bits instead of 32 bits, then it should be  O(n).
@@ -13,7 +13,7 @@ public:
     }
 };
 
-#Approach 2 : using Brian Kernighan’s method (indirectly) 
+#Approach 2: using Brian Kernighan’s method (indirectly) 
 
 Tc = O(n) //if it were n bits instead of 32 bits, then it should be  O(n).
 sc = O(1)
