@@ -1,0 +1,67 @@
+Problem link : [ https://leetcode.com/problems/shuffle-the-array/description/ ]
+Tag: Easy 
+Approach 1: Making a new desired vector.
+
+Tc = O(n)
+sc = O(n)
+
+code:
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+      vector<int>x;
+      for(int i=0;i<n;i++){
+        x.push_back(nums[i]);
+        x.push_back(nums[i+n]);
+      }  
+      return x;
+    }
+};
+
+Approach 2: Here, the maximum array value is 1000. So we take a number greater than 1000 is 1001. We want to store the pair in 1 index [i+n].
+Then again, put in the  desired index.
+
+Tc = O(n)
+sc = O(1)
+
+code:
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+      
+      for(int i=0;i<n;i++){
+        nums[i+n]=nums[i]*1001+nums[i+n];
+      }  
+      for (int i=0;i<n;i++){
+        int n1 = nums[i+n]/1001;
+        int n2 = nums[i+n]%1001;
+        nums[2*i]=n1;
+        nums[2*i+1]=n2;
+      }
+      return nums;
+    }
+};
+
+Approach 3:Bit manipulation, left shift, Right shift.
+
+Tc = O(n)
+sc = O(1)
+
+code:
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+      
+      for(int i=0;i<n;i++){
+        nums[i+n]=nums[i+n]<<10 | nums[i];
+      }  
+      int x = pow(2,10)-1; // highest number of 10 bits 1023. 
+      for (int i=0;i<n;i++){
+        int n1 = nums[i+n] & x;//can use 1023 directly instead of x
+        int n2 = nums[i+n]>>10;
+        nums[2*i]=n1;
+        nums[2*i+1]=n2;
+      }
+      return nums;
+    }
+};
