@@ -1,1 +1,53 @@
+Problem link : [ https://leetcode.com/problems/power-of-two/ ]
+Tag: Easy
+#Approach 1: using pow of 2.
 
+Tc = O(1) //Its one kind of O(n) .its O(1) because only for loop limit is (2^31)
+sc = O(1)
+
+#code: 
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        int ans =0;
+        for (int i=0;i<31;i++){
+            ans = pow(2,i);
+            if (ans == n) 
+            return true;
+        }
+        return false;
+    }
+};
+
+#Approach 2: Dividing n by 2
+// If 2 is a divisor of n, that means after completing the loop, it will return 1 at the end.
+
+Tc = O(logn) 
+sc = O(1)
+
+#code
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        while (n>0){
+            if (n==1) return true;
+            if (n%2 !=0) break;
+            n/=2;
+        }
+        return false;
+    }
+};
+
+#Approach 3: Using (n & (n-1)) 
+//And operation between multiples of 2 and the next lower number will always give 0, and otherwise it will never be 0.
+
+Tc = O(1)
+sc = O(1)
+  
+#code:
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        return n > 0 &&  (n & n - 1)==0;
+    }
+};
