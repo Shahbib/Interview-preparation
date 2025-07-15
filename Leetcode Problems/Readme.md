@@ -1,26 +1,26 @@
-# Template for upoading a leetcode problem solution
+# Template for uploading a LeetCode problem solution
 
-Problem link : [  ]
-Tag: Easy/Medium/ Hard
-#Approach 1 : 
+**Problem link : [  ]**<br>
+**Tag: Easy/Medium/ Hard**<br>
+**Approach 1:**
 
-Tc = O( ) 
+Tc = O( ) <br>
 sc = O( )
 
-#code: 
+**code:** 
 
 
-#Approach 2:  
+__Approach 2:__  
 
-Tc = O( ) 
+Tc = O( ) <br>
 sc = O( )
 
-#code
+**code**
 
 
-#Approach 3: 
+**Approach 3:** 
 
-Tc = O( )
-sc = O( )
+Tc = O( )<br>
+sc = O( )<br>
   
-#code:
+**code:**
