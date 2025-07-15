@@ -1,2 +1,3 @@
 # Interview-preparation
-all notes and problems. I am solving for my interview preparation
+I am a recent CSE graduate preparing for my interview in the software industry. 
+This repository is maintained for tracking my progress.
