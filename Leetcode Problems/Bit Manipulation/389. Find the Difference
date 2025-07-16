@@ -1,0 +1,59 @@
+Problem link : [ https://leetcode.com/problems/find-the-difference/description/]
+Tag: Easy
+Approach 1: sorting + Comparison
+
+Tc = O(nlogn)
+sc = O(n) //usually O(1) but string copies (s, t) passed by value use O(n) space each
+
+code
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int n=s.size();
+        sort (t.begin(),t.end());
+        sort (s.begin(),s.end());        
+        for (int i=0;i<n;i++){
+            if(t[i]!=s[i]) 
+            return t[i];            
+            }
+        return t[n];
+    }
+};
+
+Approach 2: (sustraction between big sting ascii sum and small sting ascii sum)
+
+Tc = O(n)
+sc = O(1)
+
+code:
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int ss=0,tt=0;
+        for (int i=0;i<s.size();i++)ss+=s[i];
+        for (int i=0;i<t.size();i++)tt+=t[i];
+        return tt-ss;
+    }
+};
+
+
+
+Approach 3: bit manipulation
+
+Tc = O(n)
+sc = O(1)
+
+code:
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        char ans = 0;
+        for(char x:s){
+            ans^=x;
+        }
+        for (char x:t){
+            ans ^= x;
+        }
+        return ans;
+    }
+};
