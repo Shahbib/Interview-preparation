@@ -1,0 +1,70 @@
+Problem link : [https://leetcode.com/problems/number-complement/]
+Tag: Easy
+Approach 1: Brute force convert in binary than convert 0 and 1 bit
+
+Tc = O(logn)
+sc = O(logn)
+
+code:
+class Solution {
+public:
+    int findComplement(int num) {
+        
+        int ans=0;
+        string s;
+        //converting binary manually
+        while (num>0){
+            char x=char((num%2)+'0');
+            s.push_back(x);
+            num/=2;
+        }
+        reverse(s.begin(),s.end());
+       
+        //find complement's binary numbers string 
+        for (char & c : s){
+            if (c=='1') c='0';
+            else c='1';
+        }
+        //convert string into int
+        for(char c: s){
+            ans= ans * 2 + (c-'0');
+        }
+
+        return ans;
+    }
+};
+
+Approach 2:Bit manipulation 
+
+Tc = O(logn)
+sc = O(1)
+
+code:
+class Solution {
+public:
+    int findComplement(int num) {
+        int nums=0;
+        int n=num;
+        while (n>0){
+            nums = (nums<<1)|1;
+            n=n>>1;
+        }
+        return (nums^num);
+    }
+};
+
+Approach 3: Same as approach 2 but optimize to O(1) xoring with next all one tht find the complement 
+
+Tc = O(1)
+sc = O(1)
+
+code:
+class Solution {
+public:
+    int findComplement(int num) {
+        int power = (log2(num))+1;
+        int nums= pow(2,power)-1; //it means a number whichis all 1
+        cout << power << " "<<nums;
+        return (nums^num);
+    }
+};
