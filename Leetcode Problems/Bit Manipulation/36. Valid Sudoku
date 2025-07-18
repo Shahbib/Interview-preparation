@@ -1,0 +1,133 @@
+Problem link : [https://leetcode.com/problems/valid-sudoku/description/]
+Tag: Medium
+Approach 1:Brute force using array
+
+Tc = O(1)//its constant only size is 9 thats why but its one kind O(n^2) solution
+sc = O(1)//O(n) for map but size is 9
+
+code
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+         for (int i = 0; i < 9; i++) {
+            bool row[9] = {false};
+            bool col[9] = {false};
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.') {
+                    int idx = board[i][j] - '1';
+                    if (row[idx]==true) return false;
+                    row[idx] = true;
+                }
+                if (board[j][i] != '.') {
+                    int idx = board[j][i] - '1';
+                    if (col[idx]==true) return false;
+                    col[idx] = true;
+                }
+            }
+        }
+        for(int i=0;i<9;i+=3){            
+            for(int j=0;j<9;j+=3){
+                bool box[9] = {false};
+                for (int k=i;k<(i+3);k++){
+                    for (int l=j;l<(j+3);l++){
+                        if(board[k][l]!='.'){
+                    int idx = board[k][l] - '1';
+                     if (box[idx]) return false;
+                            box[idx] = true;
+                }
+                }
+                }
+            }
+        }
+        return true;
+    }
+};
+
+Approach 2: brute force map using
+
+Tc = O(1)//its constant only size is 9 thats why but its one kind O(n^2) solution
+sc = O(1)//O(n) for map but size is 9
+
+code:
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        int row=9,col=9;
+        for(int i=0;i<row;i++){
+            unordered_map<char,int>map;
+            for(int j=0;j<col;j++){
+                if(board[i][j]!='.'){
+                    map[board[i][j]]++;
+                }
+                if (map[board[i][j]]>1){
+                    
+                    return false;
+                }
+            }
+        }
+        for(int i=0;i<row;i++){
+            unordered_map<char,int>map;
+            for(int j=0;j<col;j++){
+                if(board[j][i]!='.'){
+                    map[board[j][i]]++;
+                }
+                if (map[board[j][i]]>1){
+                   
+                    return false;
+                }
+            }
+        }
+        for(int i=0;i<=6;i+=3){            
+            for(int j=0;j<=6;j+=3){
+                unordered_map<char,int>map;
+                for (int k=i;k<(i+3);k++){
+                    for (int l=j;l<(j+3);l++){
+                        if(board[k][l]!='.'){
+                    map[board[k][l]]++;
+                }
+                if (map[board[k][l]]>1){
+                    return false;
+                }
+                }
+                }
+            }
+        }
+        return true;
+    }
+};
+
+
+
+Approach 3: bitmasking
+
+Tc = O(1)//its constant only size is 9 thats why but its one kind O(n^2) solution
+sc = O(1)//O(n) for map but size is 9
+
+code:
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<int> row(9,0),col(9,0),box(9,0);
+        for(int i=0;i<board.size();++i) {
+            for(int j=0;j<board[0].size();++j) {
+
+                int num = board[i][j]-'0';
+                if(num >= 1 && num <= 9) {
+                    int m = 1<<num;
+
+                    if( (m&row[i]) != 0) return false;
+                    else row[i] |= m;
+
+                    if( (m&col[j]) != 0)    return false;
+                    else    col[j] |= m;
+
+                    int x = (i/3)*3+j/3;
+                    if( (m&box[x]) != 0)return false;
+                    else    box[x] |= m;
+                    
+                }
+            }
+        }
+        return true;
+    }
+};
