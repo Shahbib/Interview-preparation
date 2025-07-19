@@ -1,0 +1,84 @@
+Problem link : [https://leetcode.com/problems/last-stone-weight/]
+Tag: Easy
+Approach 1: brute force
+
+Tc = O(n*nlogn)=O(n^2logn)//because n loop time sorting
+sc = O(1)
+
+code:
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        
+        while(stones.size()>1){
+            int n=stones.size();
+            sort(stones.begin(),stones.end());
+            int y =stones[n-1];
+            int x =stones[n-2];
+            stones.pop_back();
+            stones.pop_back();
+            if(x!=y) {
+                stones.push_back(y-x);          
+            }
+        }
+        return stones.empty()?0:stones[0];
+    }
+};
+
+Approach 2: priority queue
+
+Tc = O(nlogn)
+sc = O(n)
+
+code
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int>pq;
+        for(int num:stones){
+            pq.push(num);
+        }
+        while (pq.size()>1){
+            int x=pq.top();
+            pq.pop();
+            int y=pq.top();
+            pq.pop();
+            if(x!=y){
+                pq.push(x-y);
+            }
+        }
+        return pq.empty()?0:pq.top();
+    }
+};
+
+Approach 3: bucket sort
+
+Tc = O(n) //its O(w+n),but w=1000,so O(n) 
+sc = O(1)//array size is specified
+
+code:
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        vector<int>buckets(1001,0);
+        for(int num:stones){
+            buckets[num]++;
+        }
+        for(int i=1000;i>0;i--){
+            while (buckets[i]>0){
+                if (buckets[i]>=2){
+                    buckets[i]-=2;
+                }
+                else{
+                    int j=i-1;
+                    while (j>0 && buckets[j]==0)j--;
+                    if (j==0) return i;
+                    buckets[j]--;
+                    buckets[i-j]++;
+                    buckets[i]--;
+                }
+            }
+        }
+        return 0;
+    }
+};
