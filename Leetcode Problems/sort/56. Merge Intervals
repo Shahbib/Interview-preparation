@@ -1,0 +1,24 @@
+Problem link : [ https://leetcode.com/problems/merge-intervals/description/ ]
+Tag: Medium
+Approach 1:
+
+Tc = O(nlogn)
+sc = O(n)
+
+code
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort (intervals.begin(),intervals.end());
+        vector<vector<int>>v;
+        for(auto n:intervals){
+            if(v.empty()||v.back()[1]<n[0]){
+                v.push_back(n);
+            }
+            else{
+                v.back()[1]=max(v.back()[1],n[1]);
+            }
+        }
+        return v;
+    }
+};
